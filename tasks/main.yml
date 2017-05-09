@@ -4,20 +4,17 @@
   command: getconf LONG_BIT
   register: cpu_arch
 
-- name: Debug
-  debug: var=cpu_arch
-
 - name: Download deb file for Amazon Linux, RHEL, and CentOS 64-bit
   become: yes
   become_user: root
   command: yum install -y https://s3.amazonaws.com/ec2-downloads-windows/SSMAgent/latest/linux_amd64/amazon-ssm-agent.rpm
-  when: (ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux') and cpu_arch.stdout == '64'
+  when: (ansible_distribution == 'Amazon' or ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux') and cpu_arch.stdout == '64'
 
 - name: Download deb file for Amazon Linux, RHEL, and CentOS 32-bit
   become: yes
   become_user: root
   command: sudo yum install -y https://s3.amazonaws.com/ec2-downloads-windows/SSMAgent/latest/linux_386/amazon-ssm-agent.rpm
-  when: (ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux') and cpu_arch.stdout == '32'
+  when: (ansible_distribution == 'Amazon' or ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux') and cpu_arch.stdout == '32'
 
 - name: Download deb file for Ubuntu Server 64-bit
   become: yes
