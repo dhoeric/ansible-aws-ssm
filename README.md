@@ -4,6 +4,7 @@ dhoeric.aws-ssm
 [![Build Status](https://travis-ci.org/dhoeric/ansible-aws-ssm.svg?branch=master)](https://travis-ci.org/dhoeric/ansible-aws-ssm)
 
 Install AWS EC2 Systems Manager (SSM) agent
+
 http://docs.aws.amazon.com/systems-manager/latest/userguide/ssm-agent.html
 
 Requirements
