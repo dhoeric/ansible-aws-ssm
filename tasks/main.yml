@@ -10,7 +10,7 @@
   yum:
     name: https://s3.amazonaws.com/ec2-downloads-windows/SSMAgent/latest/linux_amd64/amazon-ssm-agent.rpm
     state: present
-  when: (ansible_distribution == 'Amazon' or ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux') and cpu_arch.stdout == '64'
+  when: ansible_os_family == 'RedHat' and cpu_arch.stdout == '64'
 
 - name: Download deb file for Amazon Linux, RHEL, and CentOS 32-bit
   become: yes
@@ -18,7 +18,7 @@
   yum:
     name: https://s3.amazonaws.com/ec2-downloads-windows/SSMAgent/latest/linux_386/amazon-ssm-agent.rpm
     state: present
-  when: (ansible_distribution == 'Amazon' or ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux') and cpu_arch.stdout == '32'
+  when: ansible_os_family == 'RedHat' and cpu_arch.stdout == '32'
 
 - name: Download deb file for Ubuntu Server 64-bit
   become: yes
