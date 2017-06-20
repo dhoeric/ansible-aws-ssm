@@ -3,6 +3,7 @@
 - name: Get CPU architecture
   command: getconf LONG_BIT
   register: cpu_arch
+  changed_when: False
 
 - name: Download deb file for Amazon Linux, RHEL, and CentOS 64-bit
   become: yes
