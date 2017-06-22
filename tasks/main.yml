@@ -5,43 +5,24 @@
   register: cpu_arch
   changed_when: False
 
-- name: Download deb file for Amazon Linux, RHEL, and CentOS 64-bit
+- name: Change URL destination for 32bit arch
+  set_fact:
+    url: '386'
+  when: cpu_arch.stdout == '32'
+
+- name: Install rpm file for Redhat Familiy (Amazon Linux, RHEL, and CentOS) 32/64-bit
   become: yes
   become_user: root
   yum:
-    name: https://s3.amazonaws.com/ec2-downloads-windows/SSMAgent/latest/linux_amd64/amazon-ssm-agent.rpm
+    name: "https://s3.amazonaws.com/ec2-downloads-windows/SSMAgent/latest/linux_{{ url }}/amazon-ssm-agent.rpm"
     state: present
-  when: ansible_os_family == 'RedHat' and cpu_arch.stdout == '64'
+  when: ansible_os_family == 'RedHat'
 
-- name: Download deb file for Amazon Linux, RHEL, and CentOS 32-bit
-  become: yes
-  become_user: root
-  yum:
-    name: https://s3.amazonaws.com/ec2-downloads-windows/SSMAgent/latest/linux_386/amazon-ssm-agent.rpm
-    state: present
-  when: ansible_os_family == 'RedHat' and cpu_arch.stdout == '32'
-
-- name: Download deb file for Debian OS Family 64-bit
-  become: yes
-  become_user: root
-  get_url:
-    url: https://s3.amazonaws.com/ec2-downloads-windows/SSMAgent/latest/debian_amd64/amazon-ssm-agent.deb
-    dest: /tmp
-  when: (ansible_os_family == 'Debian') and cpu_arch.stdout == '64'
-
-- name: Download deb file for Debian OS Family 32-bit
-  become: yes
-  become_user: root
-  get_url:
-    url: https://s3.amazonaws.com/ec2-downloads-windows/SSMAgent/latest/debian_386/amazon-ssm-agent.deb
-    dest: /tmp
-  when: ( ansible_os_family == 'Debian') and cpu_arch.stdout == '32'
-
-- name: Install deb file for Ubuntu
+- name: Install deb file for Debian family 32/64-bit
   become: yes
   become_user: root
   apt:
-    deb: /tmp/amazon-ssm-agent.deb
+    deb: "https://s3.amazonaws.com/ec2-downloads-windows/SSMAgent/latest/debian_{{ url }}/amazon-ssm-agent.deb"
   when: ansible_os_family == 'Debian'
 
 - name: Register to service
