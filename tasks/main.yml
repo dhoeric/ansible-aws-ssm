@@ -3,6 +3,7 @@
 - name: Get CPU architecture
   command: getconf LONG_BIT
   register: cpu_arch
+  changed_when: False
 
 - name: Change URL destination for 32bit arch
   set_fact:
@@ -15,7 +16,7 @@
   yum:
     name: "https://s3.amazonaws.com/ec2-downloads-windows/SSMAgent/latest/linux_{{ url }}/amazon-ssm-agent.rpm"
     state: present
-  when: ansible_os_family == 'RedHat' and cpu_arch.stdout == '64'
+  when: ansible_os_family == 'RedHat'
 
 - name: Install deb file for Debian family 32/64-bit
   become: yes
