@@ -10,7 +10,7 @@
     url: '386'
   when: cpu_arch.stdout == '32'
 
-- name: Install rpm file for Redhat Familiy (Amazon Linux, RHEL, and CentOS) 32/64-bit
+- name: Install rpm file for Redhat Family (Amazon Linux, RHEL, and CentOS) 32/64-bit
   become: yes
   become_user: root
   yum:
