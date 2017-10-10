@@ -4,6 +4,7 @@
   command: getconf LONG_BIT
   register: cpu_arch
   changed_when: False
+  check_mode: no
 
 - name: Change URL destination for 32bit arch
   set_fact:
