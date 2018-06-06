@@ -26,6 +26,9 @@
     deb: "https://s3.amazonaws.com/ec2-downloads-windows/SSMAgent/latest/debian_{{ url }}/amazon-ssm-agent.deb"
   when: ansible_os_family == 'Debian'
 
+- include: register.yml
+  when: aws_ssm_activation_code is defined and aws_ssm_activation_id is defined
+
 - name: Register to service
   become: yes
   become_user: root
