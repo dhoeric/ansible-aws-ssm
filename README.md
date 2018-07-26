@@ -17,7 +17,21 @@ None
 Role Variables
 --------------
 
-None
+Available variables are listed below, along with default values:
+
+```
+# The defaults provided by this role are specific to each distribution.
+url: 'amd64'
+```
+
+For installion in [Raspbian](https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-manual-agent-install.html#agent-install-raspbianjessie), please find the activation code and id before using this role
+```
+url: 'arm'
+aws_ssm_activation_code:
+aws_ssm_activation_id:
+aws_ssm_ec2_region: "{{ec2_region}}"
+```
+
 
 Dependencies
 ------------
