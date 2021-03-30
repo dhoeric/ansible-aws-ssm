@@ -11,6 +11,26 @@
     url: '386'
   when: cpu_arch.stdout == '32'
 
+- name: Install pre-required packages
+  become: yes
+  become_user: root
+  package:
+    name: gnupg
+    state: present
+
+- name: Copy GPG key
+  copy:
+    src: amazon-ssm-agent.gpg
+    dest: /tmp/amazon-ssm-agent.gpg
+
+- name: Import GPG key for Redhat Family (Amazon Linux, RHEL, and CentOS) 32/64-bit
+  become: yes
+  become_user: root
+  rpm_key:
+    key: /tmp/amazon-ssm-agent.gpg
+    state: present
+  when: ansible_os_family == 'RedHat'
+
 - name: Install rpm file for Redhat Family (Amazon Linux, RHEL, and CentOS) 32/64-bit
   become: yes
   become_user: root
@@ -18,6 +38,14 @@
     name: "https://s3.amazonaws.com/ec2-downloads-windows/SSMAgent/latest/linux_{{ url }}/amazon-ssm-agent.rpm"
     state: present
   when: ansible_os_family == 'RedHat'
+
+- name: Import GPG key for Debian family 32/64-bit
+  become: yes
+  become_user: root
+  apt_key:
+    file: /tmp/amazon-ssm-agent.gpg
+    state: present
+  when: ansible_os_family == 'Debian'
 
 - name: Install deb file for Debian family 32/64-bit
   become: yes
