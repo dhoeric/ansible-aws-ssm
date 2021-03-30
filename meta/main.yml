@@ -31,9 +31,9 @@ galaxy_info:
   # platform on this list, let us know and we'll get it added!
   #
   platforms:
-  - name: EL
-    versions:
-    - all
+    - name: EL
+      versions:
+        - all
   #  - 5
   #  - 6
   #  - 7
@@ -84,9 +84,9 @@ galaxy_info:
   #  versions:
   #  - all
   #  - 2012R2
-  - name: Amazon
-    versions:
-    - all
+    - name: Amazon
+      versions:
+        - all
   #  - 2013.03
   #  - 2013.09
   #- name: GenericBSD
@@ -113,8 +113,8 @@ galaxy_info:
   #  - 9.1
   #  - 9.2
   #  - 9.3
-  - name: Ubuntu
-    versions:
+    - name: Ubuntu
+      versions:
   #  - all
   #  - lucid
   #  - maverick
@@ -124,11 +124,11 @@ galaxy_info:
   #  - quantal
   #  - raring
   #  - saucy
-    - trusty
+        - trusty
   #  - utopic
   #  - vivid
   #  - wily
-    - xenial
+        - xenial
   #- name: SLES
   #  versions:
   #  - all
@@ -146,11 +146,11 @@ galaxy_info:
   #  versions:
   #  - all
   #  - any
-  - name: Debian
-    versions:
+    - name: Debian
+      versions:
   #  - all
   #  - etch
-    - jessie
+        - jessie
   #  - lenny
   #  - sid
   #  - squeeze

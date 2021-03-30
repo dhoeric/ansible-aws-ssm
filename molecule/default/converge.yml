@@ -9,4 +9,4 @@
       when: ansible_os_family == 'Debian'
 
   roles:
-    - role: ansible-aws-ssm
+    - role: dhoeric.aws-ssm
